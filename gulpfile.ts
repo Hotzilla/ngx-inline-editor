@@ -145,7 +145,6 @@ task("rollup:umd", () => src(`${tmpBundlesFolder}/${bundleNameES5}`)
         external: ROLLUP_EXTERNAL,
         format: "umd",
         moduleName: libName,
-        moduleId: "",
         separateCaches: rollupUMDCaches,
         onwarn(message) {
             if (message.code === "THIS_IS_UNDEFINED") {
