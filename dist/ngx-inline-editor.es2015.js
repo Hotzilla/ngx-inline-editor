@@ -64,7 +64,7 @@ class InlineEditorState {
      * @return {?}
      */
     getState() {
-        const { value, editing, disabled, empty } = this;
+        const { value, editing, disabled, empty, name } = this;
         return {
             value,
             editing,
@@ -122,7 +122,7 @@ class InputBase {
         this.subscriptions.onUpdateConfigSubcription = this.service.events.internal.onUpdateConfig.subscribe((config) => this.onUpdateConfig(config));
         this.subscriptions.onUpdateStateSubscription = this.service.events.internal.onUpdateStateOfChild.subscribe((state) => {
             const newState = state.getState();
-            this.updateState(this.state.newState(Object.assign({}, newState, { empty: this.isEmpty(newState.value) })));
+            this.updateState(this.state.newState(Object.assign({}, newState, { empty: this.isEmpty(newState.value), name: this.config.name })));
             this.service.events.internal.onUpdateStateOfParent.emit(this.state.clone());
         });
     }

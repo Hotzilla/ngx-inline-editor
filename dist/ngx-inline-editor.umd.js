@@ -78,7 +78,7 @@ var InlineEditorState = (function () {
      * @return {?}
      */
     InlineEditorState.prototype.getState = function () {
-        var _a = this, value = _a.value, editing = _a.editing, disabled = _a.disabled, empty = _a.empty;
+        var _a = this, value = _a.value, editing = _a.editing, disabled = _a.disabled, empty = _a.empty, name = _a.name;
         return {
             value: value,
             editing: editing,
@@ -137,7 +137,7 @@ var InputBase = (function () {
         this.subscriptions.onUpdateConfigSubcription = this.service.events.internal.onUpdateConfig.subscribe(function (config) { return _this.onUpdateConfig(config); });
         this.subscriptions.onUpdateStateSubscription = this.service.events.internal.onUpdateStateOfChild.subscribe(function (state) {
             var newState = state.getState();
-            _this.updateState(_this.state.newState(Object.assign({}, newState, { empty: _this.isEmpty(newState.value) })));
+            _this.updateState(_this.state.newState(Object.assign({}, newState, { empty: _this.isEmpty(newState.value), name: _this.config.name })));
             _this.service.events.internal.onUpdateStateOfParent.emit(_this.state.clone());
         });
     }
